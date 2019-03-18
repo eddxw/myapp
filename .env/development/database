@@ -1,0 +1,3 @@
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=pablitoclavounclavito
+POSTGRES_DB=myapp_development
