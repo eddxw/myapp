@@ -2,12 +2,12 @@ version: '3'
 
 services:
   web:
-    build: athermosillo/myapp_web:prod
+    image: athermosillo/myapp_web:prod
     ports:
       - "80:3000"
     env_file:
-      - .env/production/web
       - .env/production/database
+      - .env/production/web
 
   redis:
     image: redis
@@ -19,15 +19,28 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-  db-migrator:
+  db-creator:
     image: athermosillo/myapp_web:prod
-    command: ["./wait-for", "--timeout=300", "database:5432", "--", "bin/rails", "db:migrate"]
+    command: ["bin/rails", "db:create"]   
     env_file:
-      - .env/production/web
       - .env/production/database
+      - .env/production/web
     deploy:
       restart_policy:
         condition: none
-    
+
+  db-migrator:
+    image: athermosillo/myapp_web:prod
+    command: ["bin/rails", "db:migrate"]    
+    env_file:
+      - .env/production/database
+      - .env/production/web
+    deploy:
+      restart_policy:
+        condition: none
+    depends_on:     
+      - db-creator   
+
 volumes:
   db_data:
+
