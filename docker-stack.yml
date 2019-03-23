@@ -21,7 +21,7 @@ services:
 
   db-creator:
     image: athermosillo/myapp_web:prod
-    command: ["bin/rails", "db:create"]   
+    command: ["bin/rails", "db:create"]  
     env_file:
       - .env/production/database
       - .env/production/web
