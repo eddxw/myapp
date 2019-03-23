@@ -31,5 +31,7 @@ RUN bundle install
 
 COPY . /usr/src/app/
 
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
 # END: final-part-after-javascript-stuff

@@ -36,5 +36,7 @@ RUN ["chmod", "+x", "/usr/src/app/wait-for"]
 
 RUN bin/rails assets:precompile
 
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
 # END: final-part-after-javascript-stuff
