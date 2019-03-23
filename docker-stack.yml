@@ -21,7 +21,8 @@ services:
 
   db-creator:
     image: athermosillo/myapp_web:prod
-    command: ["bin/rails", "db:create"]  
+    command: ["./wait-for", "--timeout=300", "database:5432", "--",   
+              "bin/rails", "db:create"]   
     env_file:
       - .env/production/database
       - .env/production/web
@@ -31,7 +32,8 @@ services:
 
   db-migrator:
     image: athermosillo/myapp_web:prod
-    command: ["bin/rails", "db:migrate"]    
+    command: ["./wait-for", "--timeout=300", "database:5432", "--",   
+              "bin/rails", "db:migrate"]    
     env_file:
       - .env/production/database
       - .env/production/web

@@ -7,9 +7,7 @@
 # Ignore bundler config.
 /.bundle
 
-/.env/*
 /.dockerignore
-
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

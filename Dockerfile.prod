@@ -20,13 +20,10 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
   nodejs \
   yarn
 
-# START: final-part-after-javascript-stuff
 COPY Gemfile* /usr/src/app/
 WORKDIR /usr/src/app
 
-# START_HIGHLIGHT
 ENV BUNDLE_PATH /gems
-# END_HIGHLIGHT
 
 RUN bundle install
 
@@ -39,4 +36,3 @@ RUN bin/rails assets:precompile
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
-# END: final-part-after-javascript-stuff
