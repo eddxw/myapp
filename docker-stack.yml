@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: athermosillo/myapp_web:prod
+    image: athermosillo/myapp_web:arm
     ports:
       - "80:3000"
     env_file:
@@ -20,7 +20,7 @@ services:
       - db_data:/var/lib/postgresql/data
 
   db-creator:
-    image: athermosillo/myapp_web:prod
+    image: athermosillo/myapp_web:arm
     command: ["./wait-for", "--timeout=300", "database:5432", "--",   
               "bin/rails", "db:create"]   
     env_file:
@@ -31,7 +31,7 @@ services:
         condition: none
 
   db-migrator:
-    image: athermosillo/myapp_web:prod
+    image: athermosillo/myapp_web:arm
     command: ["./wait-for", "--timeout=300", "database:5432", "--",   
               "bin/rails", "db:migrate"]    
     env_file:
@@ -44,7 +44,7 @@ services:
       - db-creator   
       
   visualizer:
-    image: dockersamples/visualizer:stable
+    image: alexellis2/visualizer-arm
     ports:
       - "8080:8080"
     volumes:
